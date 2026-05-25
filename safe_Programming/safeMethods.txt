@@ -1,0 +1,27 @@
+
+                --------------------------------------------------------------------------------------------------------------------------------------------
+				gets(char *buf) is a very dangerous function. Reads the input until the EOF or '\n' but doesnt know the size 
+							of the buf.
+					If scanf("%s", buf) is not liimited by the length of the input, then its also dangerous
+					
+			Best method - fgets(char* dest, int n, FILE* stream) - at most n-1 elements are read. In the end is the Nullterminator used
+                --------------------------------------------------------------------------------------------------------------------------------------------
+
+               ------------------------------------------------------------------------------------------------------------------------------------------------
+						strcpy(char* dest, const char* src) - copies from src to dest and includes the Nullterminator.
+							THE PROBLEM - size(src) > size(dest)
+
+				Better alternative - strncpy(char* dest, const char* src, size_t n) - n defines how many elements are copied at most
+						The result is Nullterminated only if there was '\0' in n bytes.
+		----------------------------------------------------------------------------------------------------------------------------------------------
+
+	      ---------------------------------------------------------------------------------------------------------------------------------------------
+		strcat(char* dest, const char* src) - concatenates two string. Overrides the Nullterminator of the first String with the first element 
+						of the second String. End is always Nullterminated
+			BIG PROBLEM - strlen(dest) + strlen(src) >= size(dest). THATS VERY BAD EVEN IN CASE OF == BCS WE NEED ONE MORE PLACE FOR '\0'
+						Example: char dest[8] = "Hello"; char src[] = "Bob"; strcat(dest, src);
+			
+			ALTERNATIVE: strncat(char* dest, const char* src, size_t n) -
+											n is the maximum element of the elements from src to take 
+											if size(src) >= n -> src doesnt have to have '\0'. Will be added auto...
+											
