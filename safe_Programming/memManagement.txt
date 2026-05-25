@@ -1,0 +1,28 @@
+
+			unsigned m; unsigned n;
+			double* mat = malloc(m*n*sizeof(mat)); - VERY VERY BAD, as m*n can lead to overflow and too small memory allocated
+
+			double* mat = malloc((size_t) n * m * sizeof(*mat))
+			
+
+			GCC safe methods
+				
+			unsigned res;
+			__builtin_*_overflow(a, b, &res) - computes and saves the result, returns true if there was an overflow, otherwise false
+
+			instead of * should be {add, sub, mul} and separately for types {uadd(unsigned int), sadd(signed int), umull(unsigned long long)}
+
+
+
+			_p
+			To check for overflow without saving the result - __builtin_*_overflow_p(a, b, (unsigned) 0)
+			
+			Example: 
+			
+			unsigned mn;
+
+			if (__builtin_mul_overflow(m, n, &mn)) {
+    				return NULL;
+			}
+
+			double *mat = malloc(mn * sizeof *mat);
