@@ -1,0 +1,48 @@
+
+First S means one instruction, single data
+SS - single precision. float - 32 bits
+SD - double precision. double - 64 bits
+
+movss xmm0, xmm1
+
+Convert floats
+
+32 bit float -> 64 bit float: cvtss2sd
+64 bit float -> 32 bit float: cvtsd2ss
+double -> singed int: cvtsd2si
+signed int -> double: cvtsi2sd
+
+More methods in chapter 18.4
+
+-----------------------------------------
+
+Return register is xmm0
+Registers for passing arguments are xmm0-7. Next on Stack
+You can take on that after every function call the xmm registers get bad,
+so the caller has to save them
+
+-----------------------------------------
+
+To set the register to 0 use the command 
+
+pxor dst, src
+
+with dst=src
+
+------------------------------------------
+
+To move bits without convertion between general purpose registers to xmm
+
+movd/movq - 32/64 bits
+------------------------------------------
+	Comparison
+
+ucomiss xmm1, xmm0
+
+Unsigned comparison flag style
+
+jp label 		// xmm0 || xmm1 NaN
+jb label 		// xmm1 < xmm0 - jump if below
+ja label  		// xmm1 > xmm0 - jump if above
+je label 		// xmm1 == xmm0 - jump if equal
+ 
