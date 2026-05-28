@@ -1,0 +1,45 @@
+Flags: -no-pie fixed register/instructions adresses
+	-S to see the C code as Assembly code
+
+gdb ./main                    # запустить GDB для программы main
+
+break main                    # остановиться в начале main
+break fold_right              # остановиться в начале функции fold_right
+b fold_right                  # коротко: breakpoint на fold_right
+
+run                           # запустить программу
+r                             # коротко: run
+
+next                          # выполнить следующую строку C, не заходя внутрь функций
+n                             # коротко: next
+
+step                          # выполнить следующую строку C, заходя внутрь функций
+s                             # коротко: step
+
+stepi                         # выполнить одну asm-инструкцию
+si                            # коротко: stepi
+
+nexti                         # выполнить одну asm-инструкцию, но не заходить внутрь call
+ni                            # коротко: nexti
+
+continue                      # продолжить до следующей остановки
+c                             # коротко: continue
+
+info registers                # показать все регистры
+i r                           # коротко: info registers
+
+p/x $rax                      # показать rax в hex
+p/u $rax                      # показать rax как unsigned decimal
+
+x/i $rip                      # показать текущую asm-инструкцию
+x/10i $rip                    # показать следующие 10 asm-инструкций
+
+x/10dw $rdx                   # показать 10 элементов массива, если rdx = arr
+x/20gx $rsp                   # показать стек
+
+quit                          # выйти из GDB
+q                             # коротко: quit
+
+frame
+where
+bt				shows where we are. file and line
